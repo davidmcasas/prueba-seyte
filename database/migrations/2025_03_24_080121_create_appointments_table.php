@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained('clients', 'id')->onDelete('cascade');
-            $table->dateTime('date')->nullable();
+            $table->dateTime('date');
             $table->integer('requested_examinations')->default(0);
             $table->integer('performed_examinations')->default(0);
-            $table->enum('state', ['pending', 'finished', 'canceled'])->default('pending');
+            //$table->enum('state', ['pending', 'finished', 'canceled'])->default('pending'); // esto no lo pide el funcional
             $table->timestamps();
         });
     }

@@ -3,10 +3,10 @@
     <table class="min-w-full table-fixed text-left text-sm">
         <thead class="bg-gray-600">
         <tr>
-            <th class="px-4 py-2 w-1/7">Código</th>
-            <th class="px-4 py-2 w-1/7">
+{{--            <th class="px-4 py-2 w-1/7">Código</th>--}}
+            <th class="px-4 py-2 w-2/7">
                 Razón Social
-                <input type="text" wire:model.live.debounce.200ms="company_name" placeholder="Filtrar por Razón social" class="p-2 border rounded">
+                <input type="text" wire:model.live.debounce.200ms="company_name" placeholder="Filtrar por Razón Social" class="p-2 border rounded">
             </th>
             <th class="px-4 py-2 w-1/7">CIF</th>
             <th class="px-4 py-2 w-1/7">
@@ -21,16 +21,19 @@
         <tbody>
         @foreach($clients as $client)
             <tr class="even:bg-gray-700">
-                <td class="px-4 py-2">{{ $client['code'] }}</td>
+{{--                <td class="px-4 py-2">{{ $client['code'] }}</td>--}}
                 <td class="px-4 py-2">{{ $client['company_name'] }}</td>
                 <td class="px-4 py-2">{{ $client['cif'] }}</td>
                 <td class="px-4 py-2">{{ $client['municipality'] }}</td>
                 <td class="px-4 py-2">{{ $client['contract_start_date'] }}</td>
                 <td class="px-4 py-2">{{ $client['contract_end_date'] }}</td>
                 <td class="px-4 py-2">
-                    <!-- Acciones aquí (editar, eliminar, etc.) -->
-                    <button wire:click="editClient({{ $client['id'] }})" class="bg-blue-500 rounded px-2 py-1">
+                    <button wire:click="editClient({{ $client['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
                         Editar
+                    </button>
+                    <button wire:click="openAppointmentModal({{ $client['id'] }})"
+                            class="hover:cursor-pointer bg-green-500 hover:bg-green-700 text-white px-2 py-1 rounded ml-2">
+                        Citar
                     </button>
                 </td>
             </tr>

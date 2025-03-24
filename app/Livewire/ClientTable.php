@@ -73,4 +73,10 @@ class ClientTable extends Component
         // Emitir un evento con el clientId
         $this->dispatch('editClient', $clientId);
     }
+
+    public function openAppointmentModal($clientId)
+    {
+        // Emitir un evento con el clientId
+        $this->dispatch('openAppointmentModal', $clientId);
+    }
 }

@@ -2,14 +2,8 @@
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
             <div class="container">
-                <livewire:client-table />
-            </div>
-            <div class="container mt-4">
-                <livewire:create-edit-client />
+                <livewire:appointment-table />
             </div>
         </div>
     </div>
-
-    <!-- Modal de Crear/Editar Cita -->
-    <livewire:create-appointment />
 </x-layouts.app>
