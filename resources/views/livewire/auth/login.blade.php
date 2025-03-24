@@ -38,7 +38,12 @@ new #[Layout('components.layouts.auth')] class extends Component {
         }
 
         RateLimiter::clear($this->throttleKey());
-        Session::regenerate();
+        $user = App\Models\User::query()->where('email', $this->email)->first();
+        $token = /*$user->tokens()->where('personal_access_tokens.name', 'auth_token')->first() ??*/
+            $user->createToken('auth_token')->plainTextToken;
+        Session::regenerate(); // TODO: eliminar tokens antiguos
+        session(['auth_token' => $token]);
+
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
