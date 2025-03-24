@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Client;
@@ -33,6 +34,7 @@ class ClientTable extends Component
         $this->loadClients();
     }
 
+    #[On('refreshTable')]
     public function loadClients()
     {
         // Llamada a la API con la página actual
@@ -64,5 +66,11 @@ class ClientTable extends Component
         return view('livewire.client-table', [
             'clients' => $this->clients,
         ]);
+    }
+
+    public function editClient($clientId)
+    {
+        // Emitir un evento con el clientId
+        $this->dispatch('editClient', $clientId);
     }
 }

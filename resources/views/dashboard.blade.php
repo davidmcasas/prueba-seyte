@@ -4,6 +4,9 @@
             <div class="container">
                 <livewire:client-table />
             </div>
+            <div class="container mt-4">
+                <livewire:create-edit-client />
+            </div>
         </div>
     </div>
 </x-layouts.app>
