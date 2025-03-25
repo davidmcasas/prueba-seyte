@@ -75,7 +75,8 @@ Se han implementado 3 roles con 3 respectivas cuentas de usuario
  - Administrador (admin) -> admin@example.com 
  - Encargado (manager) -> manager@example.com
  - Médico (medic) -> medic@example.com
-(Las 3 cuentas tiene la contraseña "password" por defecto)
+
+(Las 3 cuentas tienen la contraseña "password" por defecto)
 
 Se han implementado diversas limitaciones para los roles, haciendo uso del middleware [CheckRole](app/Http/Middleware/CheckRole.php) para proteger rutas API,
 o en algunos casos también haciendo comprobaciones de lógica en el controlador API.
@@ -99,7 +100,7 @@ Al ejecutar el comando anterior, se nos devolverá en la consola un token para e
 
 ## <a name="a4"></a> 4. Desarrollo Frontend
 
-El diseño de frontend consta una vista para cada uno de los modelos principales: Clientes y Citas.
+El diseño de frontend consta de una vista para cada uno de los modelos principales: Clientes y Citas.
 
 Se han diseñado en forma de datatable dinámico paginado, con la ayuda de Livewire.
 Los formularios de acciones (Nuevo Cliente, Editar, etc), se han planteado como modals superpuestos.
@@ -118,16 +119,16 @@ Vistas correspondientes:
 - [create-edit-appointment.blade.php](resources/views/livewire/create-edit-appointment.blade.php)
 - [fill-appointment.blade.php](resources/views/livewire/fill-appointment.blade.php)
 
-Gracias al uso de Livewire no ha necesitado escribir ni una sola línea de JavaScript (que conste que no tengo ningún problema con JavaScript)
+Gracias al uso de Livewire no he necesitado escribir ni una sola línea de JavaScript (que conste que no tengo ningún problema con JavaScript)
 
 
 ## <a name="a5"></a> 5. Mejoras Propuestas
 
-En el funcional se proponen varias mejoras opcionales. En este apartado repaso todas y comento las he interpretado e implementado:
+En el funcional se proponen varias mejoras opcionales. En este apartado repaso todas y comento cómo las he interpretado e implementado:
 
 ### 5.1 Clientes y Citas: "Exportación a excel de los resultados filtrados en el listado."
 He utilizado la librería "maatwebsite/excel" que permite generar archivos .csv o .xlsx de forma sencilla a partir de queries de Eloquent.
-Su acción se llaman desde el datatable respectivo, pasándole los filtros actuales.
+Su acción se llama desde el datatable respectivo, pasándole los filtros actuales.
 
 - [ClientsExport.php](app/Exports/ClientsExport.php)
 - [AppointmentsExport.php](app/Exports/AppointmentsExport.php)
@@ -161,6 +162,13 @@ Esta acción y sus implicaciones se informan al usuario en el modal de "Registra
 - "Incluir testing en el backend"
 - "Uso de Docker para el backend"
 
+### Otros detalles a tener en cuenta
+Es posible que aparezcan algunos mensajes en inglés, 
+por ejemplo en las validaciones de Laravel en los formularios, o en el correo electrónico de recuperación.
+Todos estos mensajes se pueden traducir (y debería hacerse en una aplicación real), pero no he querido entretenerme con ello.
+
+El campo "código" de cliente no es editable y se genera automáticamente en el evento creating definido en el modelo: [Client.php](app/Models/Client.php)
+El resto de campos, todos son editables ya que el funcional no especifica nada al respecto, con la única distinción de que el campo "CIF" es unique.
 
 ## <a name="a6"></a> 6. Pasos para desplegar: 
 
