@@ -19,7 +19,6 @@ class AppointmentRequest extends FormRequest
             'date' => 'required|date',
             'requested_examinations' => 'required|integer|min:0',
             'performed_examinations' => 'nullable|integer|min:0',
-            'state' => 'required|in:pending,finished,canceled',
         ];
     }
 }

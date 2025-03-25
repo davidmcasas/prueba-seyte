@@ -4,11 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AppointmentRequest;
-use App\Http\Requests\ClientRequest;
 use App\Http\Resources\AppointmentResource;
-use App\Http\Resources\ClientResource;
 use App\Models\Appointment;
-use App\Models\Client;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,13 +43,35 @@ class AppointmentController extends Controller
 
     public function update(AppointmentRequest $request, Appointment $appointment)
     {
+        if ($appointment->performed_examinations !== 0) {
+            return response()->json([
+                'error' => 'No se puede actualizar la cita porque ya se han realizado reconocimientos médicos.'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
         $appointment->update($request->validated());
         return new AppointmentResource($appointment);
     }
 
-    public function destroy(Appointment $appointment)
+    public function fill(Request $request, Appointment $appointment)
     {
-        $appointment->delete();
-        return response()->json(['message' => 'Cita eliminada'], 200);
+        if ($appointment->performed_examinations !== 0) {
+            return response()->json([
+                'error' => 'No se puede actualizar la cita porque ya se han realizado reconocimientos médicos.'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $validated = $request->validate([
+            'performed_examinations' => 'required|integer|min:0',
+        ]);
+
+        $appointment->update($validated);
+        return new AppointmentResource($appointment);
     }
+
+//    public function destroy(Appointment $appointment)
+//    {
+//        $appointment->delete();
+//        return response()->json(['message' => 'Cita eliminada'], 200);
+//    }
 }

@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Appointment;
 use App\Models\Client;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -46,11 +46,16 @@ class FillAppointment extends Component
     {
         $this->validate();
 
-        $appointment = Appointment::findOrFail($this->appointmentId);
-        $appointment->update([ // TODO: use API
-            'performed_examinations' => $this->performed_examinations ?? 0,
+        $apiUrl = route('api.appointments.fill', $this->appointmentId);
+        $response = Http::withToken(session('auth_token'))->post($apiUrl, [
+            'performed_examinations' => $this->performed_examinations,
         ]);
-        session()->flash('message', 'Cita actualizada correctamente.');
+
+        if ($response->successful()) {
+            session()->flash('message', 'Reconocimientos registrados correctamente.');
+        } else {
+            session()->flash('error', 'Hubo un problema al actualizar la cita.');
+        }
 
         $this->closeModal();
         $this->dispatch('refreshTable');

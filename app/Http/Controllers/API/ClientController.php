@@ -55,14 +55,14 @@ class ClientController extends Controller
         }
     }
 
-    public function destroy(Client $client): \Illuminate\Http\JsonResponse
-    {
-        try {
-            $client->delete();
-            return response()->json(['message' => 'Deleted successfully'], Response::HTTP_OK);
-        } catch (\Exception $exception) {
-            report($exception);
-            return response()->json(['error' => 'There is an error.'], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
+//    public function destroy(Client $client): \Illuminate\Http\JsonResponse
+//    {
+//        try {
+//            $client->delete();
+//            return response()->json(['message' => 'Deleted successfully'], Response::HTTP_OK);
+//        } catch (\Exception $exception) {
+//            report($exception);
+//            return response()->json(['error' => 'There is an error.'], Response::HTTP_INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
