@@ -49,12 +49,11 @@ class AppointmentTable extends Component
         $response = Http::withToken(session('auth_token'))
             ->get(route('api.appointments.index'), $params);
 
-
-        $data = $response->json();
-
-        $this->appointments = $data['data'] ?? [];
-        $this->page = $data['meta']['current_page'];
-        $this->lastPage = $data['meta']['last_page'];
+        if ($data = $response->json()) {
+            $this->appointments = $data['data'] ?? [];
+            $this->page = $data['meta']['current_page'];
+            $this->lastPage = $data['meta']['last_page'];
+        }
     }
 
     public function goToPage($page)

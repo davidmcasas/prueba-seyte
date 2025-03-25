@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $manager = Role::query()->create([
-            'code' => 'reservations-manager',
+            'code' => 'manager',
             'name' => 'Encargado de Reservas',
         ]);
 

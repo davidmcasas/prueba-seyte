@@ -28,7 +28,6 @@ class ClientFactory extends Factory
         $contract_start_date = Carbon::now()->addDays((rand(0, 365)));
         $contract_end_date = $contract_start_date->copy()->addDays((rand(7, 365)));
         return [
-            'code' => Str::slug($company_name),
             'company_name' => $company_name,
             'cif' => fake()->unique()->randomNumber(8, true),
             'address' => fake()->unique()->address(),
@@ -36,7 +35,7 @@ class ClientFactory extends Factory
             'province' => fake()->country(),
             'contract_start_date' => $contract_start_date,
             'contract_end_date' => $contract_end_date,
-            'examinations_included' => rand(10,1000),
+            'examinations_included' => rand(1,100) * 10,
         ];
     }
 

@@ -47,13 +47,12 @@ class ClientTable extends Component
             'page' => $this->page,
         ]);
 
-        // Procesa la respuesta de la API
-        $data = $response->json();
-
         // Asignar los datos de los clientes y la información de paginación
-        $this->clients = $data['data'];
-        $this->page = $data['meta']['current_page'];
-        $this->lastPage = $data['meta']['last_page'];
+        if ($data = $response->json()) {
+            $this->clients = $data['data'];
+            $this->page = $data['meta']['current_page'];
+            $this->lastPage = $data['meta']['last_page'];
+        }
     }
 
     public function goToPage($page)

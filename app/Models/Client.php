@@ -28,7 +28,7 @@ class Client extends Model
     protected static function booted()
     {
         static::creating(function ($client) {
-            $client->code = Str::slug($client->company_name) . '-' . uniqid();
+            $client->code = Str::slug($client->company_name) . '-' . Str::slug($client->cif);
         });
     }
 
