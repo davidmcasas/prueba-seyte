@@ -66,7 +66,6 @@ class CreateEditAppointment extends Component
         $this->dispatch('refreshTable');
     }
 
-    // Función para crear una cita
     public function createAppointment()
     {
         $apiUrl = route('api.appointments.store');

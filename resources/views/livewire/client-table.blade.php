@@ -16,8 +16,12 @@
         </div>
 
         <div>
+            <flux:button icon="plus-circle" wire:click="$dispatch('editClient')"
+                         class="bg-blue-500! hover:bg-blue-600! hover:cursor-pointer text-white px-4 py-2 rounded">
+                Nuevo Cliente
+            </flux:button>
             <flux:button icon="document-arrow-down" wire:click="exportCSV()"
-                         class="bg-green-500! hover:bg-green-600! hover:cursor-pointer text-white px-4 py-2 rounded">
+                         class="bg-green-500! hover:bg-green-600! hover:cursor-pointer text-white px-4 py-2 rounded ml-2">
                 Exportar CSV
             </flux:button>
             <flux:button icon="document-arrow-down" button wire:click="exportXLSX()"
@@ -61,8 +65,7 @@
     </table>
 
     <!-- Paginación -->
-    <!-- Paginación -->
-    <div class="mt-4 mx-4">
+    <div class="mt-4">
         <div class="flex justify-between">
             <!-- Página anterior -->
             <button

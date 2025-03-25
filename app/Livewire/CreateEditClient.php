@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Http\Requests\ClientRequest;
+use App\Models\Client;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
@@ -10,25 +10,21 @@ use Illuminate\Support\Facades\Http;
 
 class CreateEditClient extends Component
 {
+    public $isOpen = false; // Controla la visibilidad del modal
     public $clientId; // ID del cliente (si se pasa uno, es edición)
     public $company_name, $cif, $address, $municipality, $province, $contract_start_date, $contract_end_date, $examinations_included;
 
-    public function mount()
+    public function openClientModal($clientId = null)
     {
-        $this->updateForm();
-    }
+        $this->reset();
+        $this->resetValidation();
+        $this->isOpen = true;
+        $this->clientId = $clientId;
 
-    public function updateForm() {
-        // Si se pasa un ID de cliente, se trata de edición
         if ($this->clientId) {
-
-            // Hacemos la llamada a la API para obtener los datos del cliente
 
             $apiUrl = route('api.clients.show', $this->clientId);
             $response = Http::withToken(session('auth_token'))->get($apiUrl);
-            /*$response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . session('api_token'), // Usamos el token guardado en la sesión
-            ])->get("http://127.0.0.1:8000/api/clients/{$clientId}");*/
 
             if ($response->successful()) {
                 $client = $response->json()['data'];
@@ -44,6 +40,16 @@ class CreateEditClient extends Component
                 $this->examinations_included = $client['examinations_included'];
             }
         }
+    }
+
+    /*public function mount()
+    {
+        //
+    }*/
+
+    public function closeModal()
+    {
+        $this->isOpen = false;
     }
 
     public function submit()
@@ -95,11 +101,9 @@ class CreateEditClient extends Component
     }
 
     #[On('editClient')]
-    public function editClient($clientId)
+    public function editClient($clientId = null)
     {
-        $this->resetValidation();
-        $this->clientId = $clientId;
-        $this->updateForm();
+        $this->openClientModal($clientId);
     }
 
     // Función para editar un cliente

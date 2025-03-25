@@ -12,7 +12,7 @@
 
                 <h2 class="text-xl font-semibold mb-4">Registrar Reconocimientos — {{ $companyName }}</h2>
                 <h3 class="text-l font-semibold mb-4"><span>CIF: {{ $cif }}</span></h3>
-                <p class="text-red-500 font-semibold mb-4">
+                <p class="text-red-400 font-semibold mb-4 text-sm">
                     <span>Ten en cuenta que no se podrá modificar la cita tras registrar el número de reconocimientos.</span>
                 </p>
 
@@ -29,22 +29,6 @@
                             <input required type="number" wire:model="performed_examinations" class="bg-gray-800 text-white p-2 rounded border border-gray-600">
                             @error('performed_examinations') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
-
-{{--                        <div class="flex flex-col">--}}
-{{--                            <label class="text-sm">Exámenes realizados</label>--}}
-{{--                            <input type="number" wire:model="performed_examinations" class="bg-gray-800 text-white p-2 rounded border border-gray-600">--}}
-{{--                            @error('performed_examinations') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror--}}
-{{--                        </div>--}}
-
-{{--                        <div class="flex flex-col">--}}
-{{--                            <label class="text-sm">Estado</label>--}}
-{{--                            <select wire:model="state" class="bg-gray-800 text-white p-2 rounded border border-gray-600">--}}
-{{--                                <option value="pending">Pendiente</option>--}}
-{{--                                <option value="finished">Finalizado</option>--}}
-{{--                                <option value="canceled">Cancelado</option>--}}
-{{--                            </select>--}}
-{{--                            @error('state') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror--}}
-{{--                        </div>--}}
                     </div>
 
                     <div class="mt-4 flex justify-between">
