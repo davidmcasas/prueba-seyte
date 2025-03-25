@@ -44,6 +44,6 @@ class AppointmentsExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ['ID', 'Cliente (Razón Social)', 'Cliente (CIF)', 'Fecha y Hora', 'Reconocimientos Solicitados', 'Reconocimientos Contratados'];
+        return ['ID', 'Cliente (Razón Social)', 'Cliente (CIF)', 'Fecha y Hora', 'Reconocimientos Solicitados', 'Reconocimientos Realizados'];
     }
 }
