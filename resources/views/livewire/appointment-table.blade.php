@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <table class="w-full bg-gray-700 text-white rounded-lg text-sm table-auto">
+    <table class="w-full bg-gray-700 text-white text-sm table-auto">
         <thead>
         <tr class="bg-gray-900">
             <th class="p-2">Cliente (Razón Social)</th>
@@ -62,4 +62,30 @@
         @endforeach
         </tbody>
     </table>
+
+    <!-- Paginación -->
+    <div class="mt-4">
+        <div class="flex justify-between">
+            <!-- Página anterior -->
+            <button
+                wire:click="goToPage({{ $page - 1 }})"
+                class="px-4 py-2 bg-gray-700 hover:bg-gray-800 rounded"
+                @if($page == 1) disabled @endif>
+                Anterior
+            </button>
+
+            <!-- Páginas -->
+            <span class="px-4 py-2">
+            Página {{ $page }} de {{ $lastPage }}
+        </span>
+
+            <!-- Página siguiente -->
+            <button
+                wire:click="goToPage({{ $page + 1 }})"
+                class="px-4 py-2 bg-gray-700 hover:bg-gray-800 rounded"
+                @if($page == $lastPage) disabled @endif>
+                Siguiente
+            </button>
+        </div>
+    </div>
 </div>

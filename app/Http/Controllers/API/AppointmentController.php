@@ -15,24 +15,17 @@ class AppointmentController extends Controller
     {
         $query = Appointment::query()->with('client');
 
-        // Filtrar por fecha (rango)
         if ($request->filled('from_date') && $request->filled('to_date')) {
             $query->whereBetween('date', [$request->from_date, $request->to_date]);
         }
 
-        // Filtrar por cliente
         if ($request->filled('company_name')) {
             $query->whereHas('client', function($q) use($request) {
                 $q->where('company_name', 'like', '%' . $request->company_name . '%');
             });
         }
 
-        // Filtrar por estado de la cita
-//        if ($request->filled('state')) {
-//            $query->where('state', $request->state);
-//        }
-
-        return AppointmentResource::collection($query->latest()->paginate(10));
+        return AppointmentResource::collection($query->orderByDesc('date')->paginate(10));
     }
 
     public function store(AppointmentRequest $request)

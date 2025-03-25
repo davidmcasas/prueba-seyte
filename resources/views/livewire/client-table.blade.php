@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <table class="w-full bg-gray-700 text-white rounded-lg text-sm table-auto">
+    <table class="w-full bg-gray-700 text-white text-sm table-auto">
         <thead>
         <tr class="bg-gray-900">
             <th class="p-2 w-2/7">Razón Social</th>

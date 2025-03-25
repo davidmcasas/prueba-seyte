@@ -32,7 +32,7 @@ class ClientTable extends Component
 
     public function updated($propertyName)
     {
-        // Esto hace que cuando cualquier filtro cambia, se reinicie la página
+        $this->page = 1;
         $this->loadClients();
     }
 
@@ -58,7 +58,6 @@ class ClientTable extends Component
 
     public function goToPage($page)
     {
-        // Cambiar de página y recargar los datos
         $this->page = $page;
         $this->loadClients();
     }
