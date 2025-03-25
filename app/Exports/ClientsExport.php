@@ -27,6 +27,18 @@ class ClientsExport implements FromCollection, WithHeadings
             $query->where('municipality', 'like', '%' . $this->filters['municipality'] . '%');
         }
 
+        if ($this->filters['contract_state']) {
+            if ($this->filters['contract_state'] === "active") {
+                $query->where('clients.contract_start_date', '<=', now())
+                    ->where('clients.contract_end_date', '>=', now());
+            } else if ($this->filters['contract_state'] === "not_active") {
+                $query->where(function ($query) {
+                    $query->where('clients.contract_start_date', '>=', now())
+                        ->orWhere('clients.contract_end_date', '<=', now());
+                });
+            }
+        }
+
         return $query->get()->map(function ($client) {
             return [
                 'id' => $client->id,

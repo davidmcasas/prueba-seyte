@@ -26,6 +26,18 @@ class ClientController extends Controller
             $query->where('municipality', 'like', '%' . $request->municipality . '%');
         });
 
+        if ($request->has('contract_state')) {
+            if ($request->contract_state === "active") {
+                $query->where('clients.contract_start_date', '<=', now())
+                    ->where('clients.contract_end_date', '>=', now());
+            } else if ($request->contract_state === "not_active") {
+                $query->where(function ($query) {
+                    $query->where('clients.contract_start_date', '>=', now())
+                        ->orWhere('clients.contract_end_date', '<=', now());
+                });
+            }
+        }
+
         return ClientResource::collection($query->paginate(10));
     }
 

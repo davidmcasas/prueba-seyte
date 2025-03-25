@@ -22,8 +22,9 @@ class ClientTable extends Component
 
     public $company_name = '';
     public $municipality = '';
+    public $contract_state = '';
 
-    protected $queryString = ['company_name', 'municipality', 'page'];
+    protected $queryString = ['company_name', 'municipality', 'contract_state', 'page'];
 
     public function mount()
     {
@@ -44,6 +45,7 @@ class ClientTable extends Component
         $response = Http::withToken(session('auth_token'))->get($apiUrl, [
             'company_name' => $this->company_name,
             'municipality' => $this->municipality,
+            'contract_state' => $this->contract_state,
             'page' => $this->page,
         ]);
 
@@ -85,6 +87,7 @@ class ClientTable extends Component
         return Excel::download(new ClientsExport([
                 'company_name' => $this->company_name,
                 'municipality' => $this->municipality,
+                'contract_state' => $this->contract_state,
             ]), 'clientes.csv');
     }
 
@@ -93,6 +96,7 @@ class ClientTable extends Component
         return Excel::download(new ClientsExport([
                 'company_name' => $this->company_name,
                 'municipality' => $this->municipality,
+                'contract_state' => $this->contract_state,
             ]), 'clientes.xlsx');
     }
 }

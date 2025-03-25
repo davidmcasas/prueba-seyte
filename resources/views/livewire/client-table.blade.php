@@ -12,6 +12,14 @@
                     <input type="text" wire:model.live.debounce.200ms="municipality" placeholder="Filtrar por Municipio" class="p-2 bg-gray-700 text-white rounded">
                     <span class="text-xs text-gray-400 mt-1">Municipio</span>
                 </div>
+                <div class="flex flex-col">
+                    <select wire:model.live="contract_state" class="p-2 bg-gray-700 text-white rounded appearance-none">
+                        <option value="all">Todos</option>
+                        <option value="active">Activos</option>
+                        <option value="not_active">No Activos</option>
+                    </select>
+                    <span class="text-xs text-gray-400 mt-1">Estado de contrato</span>
+                </div>
             </div>
         </div>
 
