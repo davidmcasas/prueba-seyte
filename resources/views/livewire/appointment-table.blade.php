@@ -4,6 +4,7 @@
 
         <div class="flex flex-col space-y-2">
             <div class="flex space-x-2">
+                @if(!auth()->user()->isMedic())
                 <div class="flex flex-col">
                     <input type="date" wire:model.live.debounce.200ms="from_date" class="p-2 bg-gray-700 text-white rounded">
                     <span class="text-xs text-gray-400 mt-1">Desde</span>
@@ -12,6 +13,7 @@
                     <input type="date" wire:model.live.debounce.200ms="to_date" class="p-2 bg-gray-700 text-white rounded">
                     <span class="text-xs text-gray-400 mt-1">Hasta</span>
                 </div>
+                @endif
                 <div class="flex flex-col">
                     <input type="text" wire:model.live.debounce.200ms="company_name" placeholder="Filtrar por Razón Social" class="p-2 bg-gray-700 text-white rounded">
                     <span class="text-xs text-gray-400 mt-1">Razón Social</span>
@@ -53,9 +55,11 @@
                     <button wire:click="editAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
                         Editar
                     </button>
-                    <button wire:click="fillAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-green-500 hover:bg-green-700 rounded px-2 py-1 ml-2">
-                        Registrar Reconocimientos
-                    </button>
+                        @if (auth()->user()->isMedic() || auth()->user()->isAdmin())
+                        <button wire:click="fillAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-green-500 hover:bg-green-700 rounded px-2 py-1 ml-2">
+                            Registrar Reconocimientos
+                        </button>
+                        @endif
                     @endif
                 </td>
             </tr>
@@ -76,8 +80,12 @@
 
             <!-- Páginas -->
             <span class="px-4 py-2">
-            Página {{ $page }} de {{ $lastPage }}
-        </span>
+                @if (empty($appointments))
+                    Sin datos para mostrar
+                @else
+                    Página {{ $page }} de {{ $lastPage }}
+                @endif
+            </span>
 
             <!-- Página siguiente -->
             <button

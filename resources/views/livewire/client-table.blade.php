@@ -16,10 +16,12 @@
         </div>
 
         <div>
+            @if(auth()->user()->isAdmin())
             <flux:button icon="plus-circle" wire:click="$dispatch('editClient')"
                          class="bg-blue-500! hover:bg-blue-600! hover:cursor-pointer text-white px-4 py-2 rounded">
                 Nuevo Cliente
             </flux:button>
+            @endif
             <flux:button icon="document-arrow-down" wire:click="exportCSV()"
                          class="bg-green-500! hover:bg-green-600! hover:cursor-pointer text-white px-4 py-2 rounded ml-2">
                 Exportar CSV
@@ -34,12 +36,14 @@
     <table class="w-full bg-gray-700 text-white text-sm table-auto">
         <thead>
         <tr class="bg-gray-900">
-            <th class="p-2 w-2/7">Razón Social</th>
-            <th class="p-2 w-1/7">CIF</th>
-            <th class="p-2 w-1/7">Municipio</th>
-            <th class="p-2 w-1/7">Inicio</th>
-            <th class="p-2 w-1/7">Expiración</th>
-            <th class="p-2 w-1/7">Acciones</th>
+            <th class="p-2 w-1/4">Razón Social</th>
+            <th class="p-2">CIF</th>
+            <th class="p-2">Municipio</th>
+            <th class="p-2">Inicio Contrato</th>
+            <th class="p-2">Expiración Contrato</th>
+            <th class="p-2">Recon. Contratados</th>
+            <th class="p-2">Recon. Realizados</th>
+            <th class="p-2">Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -50,10 +54,14 @@
                 <td class="p-2 text-center">{{ $client['municipality'] }}</td>
                 <td class="p-2 text-center">{{ \Carbon\Carbon::parse($client['contract_start_date'])->format('d/m/Y') }}</td>
                 <td class="p-2 text-center">{{ \Carbon\Carbon::parse($client['contract_end_date'])->format('d/m/Y') }}</td>
+                <td class="p-2 text-center">{{ $client['examinations_included'] }}</td>
+                <td class="p-2 text-center">{{ 0 }}</td>
                 <td class="text-center">
+                    @if(auth()->user()->isAdmin())
                     <button wire:click="editClient({{ $client['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
                         Editar
                     </button>
+                    @endif
                     <button wire:click="openAppointmentModal({{ $client['id'] }})"
                             class="hover:cursor-pointer bg-green-500 hover:bg-green-700 text-white px-2 py-1 rounded ml-2">
                         Citar
@@ -77,8 +85,12 @@
 
             <!-- Páginas -->
             <span class="px-4 py-2">
-            Página {{ $page }} de {{ $lastPage }}
-        </span>
+                @if (empty($clients))
+                    Sin datos para mostrar
+                @else
+                    Página {{ $page }} de {{ $lastPage }}
+                @endif
+            </span>
 
             <!-- Página siguiente -->
             <button
