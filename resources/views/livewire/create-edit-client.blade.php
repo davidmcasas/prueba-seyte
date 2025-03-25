@@ -1,20 +1,20 @@
 <div>
-    @if (session()->has('message'))
+    @if ($message = session()->pull('message'))
         <div x-data="{ show: true }"
              x-show="show"
              x-init="setTimeout(() => show = false, 3000)"
              x-transition.opacity
              class="fixed bottom-10 right-10 bg-green-500 text-white p-4 rounded-lg shadow-md z-50">
-            {{ session('message') }}
+            {{ $message }}
         </div>
     @endif
-    @if (session()->has('error'))
+    @if ($error = session()->pull('error'))
         <div x-data="{ show: true }"
              x-show="show"
              x-init="setTimeout(() => show = false, 3000)"
              x-transition.opacity
              class="fixed bottom-10 right-10 bg-red-500 text-white p-4 rounded-lg shadow-md z-50">
-            {{ session('error') }}
+            {{ $error }}
         </div>
     @endif
     @if($isOpen)
