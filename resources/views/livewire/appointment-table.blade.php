@@ -54,9 +54,11 @@
                 <td class="p-2 text-center">{{ $appointment['performed_examinations'] }}</td>
                 <td class="text-center">
                     @if ($appointment['performed_examinations'] == 0)
-                    <button wire:click="editAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
-                        Editar
-                    </button>
+                        @if(!auth()->user()->isMedic())
+                        <button wire:click="editAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
+                            Editar
+                        </button>
+                        @endif
                         @if (auth()->user()->isMedic() || auth()->user()->isAdmin())
                         <button wire:click="fillAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-green-500 hover:bg-green-700 rounded px-2 py-1 ml-2">
                             Registrar Reconocimientos
