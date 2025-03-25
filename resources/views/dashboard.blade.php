@@ -1,9 +1,7 @@
-<x-layouts.app :title="__('Dashboard')">
+<x-layouts.app :title="__('Clientes')">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-            <div class="container">
-                <livewire:client-table />
-            </div>
+        <div class="relative h-full flex-1 rounded-xl border border-neutral-200 dark:border-neutral-700">
+            <livewire:client-table />
             <div class="container mt-4">
                 <livewire:create-edit-client />
             </div>
