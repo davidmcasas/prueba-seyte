@@ -17,8 +17,7 @@ class ClientsExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        // Aplicar filtros a la consulta
-        $query = Client::query();
+        $query = Client::query()->withSum('appointments', 'performed_examinations');
 
         if (!empty($this->filters['company_name'])) {
             $query->where('company_name', 'like', '%' . $this->filters['company_name'] . '%');
@@ -28,11 +27,29 @@ class ClientsExport implements FromCollection, WithHeadings
             $query->where('municipality', 'like', '%' . $this->filters['municipality'] . '%');
         }
 
-        return $query->get(['id', 'code', 'company_name', 'cif', 'address', 'municipality', 'province', 'contract_start_date', 'contract_end_date', 'examinations_included']);
+        return $query->get()->map(function ($client) {
+            return [
+                'id' => $client->id,
+                'code' => $client->code,
+                'company_name' => $client->company_name,
+                'cif' => $client->cif,
+                'address' => $client->address,
+                'municipality' => $client->municipality,
+                'province' => $client->province,
+                'contract_start_date' => $client->contract_start_date,
+                'contract_end_date' => $client->contract_end_date,
+                'examinations_included' => $client->examinations_included,
+                'performed_examinations_sum' => $client->appointments_sum_performed_examinations ?? 0,
+            ];
+        });
     }
 
     public function headings(): array
     {
-        return ['ID', 'Código', 'Razón Social', 'CIF', 'Dirección', 'Municipio', 'Provincia', 'Inicio Contrato', 'Fin Contrato', 'Reconocimientos Contratados'];
+        return [
+            'ID', 'Código', 'Razón Social', 'CIF', 'Dirección', 'Municipio',
+            'Provincia', 'Inicio Contrato', 'Fin Contrato',
+            'Reconocimientos Contratados', 'Reconocimientos Realizados'
+        ];
     }
 }

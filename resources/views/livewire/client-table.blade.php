@@ -55,7 +55,11 @@
                 <td class="p-2 text-center">{{ \Carbon\Carbon::parse($client['contract_start_date'])->format('d/m/Y') }}</td>
                 <td class="p-2 text-center">{{ \Carbon\Carbon::parse($client['contract_end_date'])->format('d/m/Y') }}</td>
                 <td class="p-2 text-center">{{ $client['examinations_included'] }}</td>
-                <td class="p-2 text-center">{{ 0 }}</td>
+                @if ($client['performed_examinations'] > $client['examinations_included'])
+                    <td class="p-2 text-red-500 font-bold text-center">{{ $client['performed_examinations']}}</td>
+                @else
+                    <td class="p-2 text-center">{{ $client['performed_examinations']}}</td>
+                @endif
                 <td class="text-center">
                     @if(auth()->user()->isAdmin())
                     <button wire:click="editClient({{ $client['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">

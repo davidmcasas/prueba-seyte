@@ -16,7 +16,8 @@ class ClientController extends Controller
 {
     public function index(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $query = Client::latest();
+        // Añadimos eager loading de appointments para evitar el N + 1
+        $query = Client::with('appointments')->latest();
 
         // Aplicar filtrado opcional por razón social o municipio
         $query->when($request->company_name, function($query) use($request) {
