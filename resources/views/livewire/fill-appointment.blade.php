@@ -8,7 +8,7 @@
     @if($isOpen)
         <div class="fixed inset-0 bg-black/85 flex justify-center items-center z-50">
             <div class="bg-gray-900 text-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto relative">
-                <button wire:click="closeModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-200">&times;</button>
+                <button wire:click="closeModal" class="absolute top-2 right-2 text-gray-400 text-4xl hover:text-gray-200">&times;</button>
 
                 <h2 class="text-xl font-semibold mb-4">Registrar Reconocimientos — {{ $companyName }}</h2>
                 <h3 class="text-l font-semibold mb-4"><span>CIF: {{ $cif }}</span></h3>

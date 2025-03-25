@@ -1,33 +1,34 @@
-<div class="p-4 bg-gray-800 rounded-lg">
-    <h2 class="text-2xl mb-4 px-2">Citas</h2>
-    <div class="flex justify-end mb-4">
-        <button wire:click="exportCSV()"
-                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-            Exportar CSV
-        </button>
-        <button wire:click="exportXLSX()"
-                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded ml-2">
-            Exportar Excel
-        </button>
-    </div>
-    <div class="flex space-x-4 mb-4">
-        <input type="date" wire:model.live.debounce.200ms="from_date" class="p-2 bg-gray-700 text-white rounded">
-        <input type="date" wire:model.live.debounce.200ms="to_date" class="p-2 bg-gray-700 text-white rounded">
-        <input type="text" wire:model.live.debounce.200ms="company_name" placeholder="Filtrar por Razón Social" class="p-2 bg-gray-700 text-white rounded">
+<div class="p-4 bg-gray-800 rounded-lg h-full">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl px-2 text-white">Citas</h2>
 
-{{--        <select wire:model="client_id" class="p-2 bg-gray-700 text-white rounded">--}}
-{{--            <option value="">Todos los clientes</option>--}}
-{{--            @foreach ($clients as $client)--}}
-{{--                <option value="{{ $client->id }}">{{ $client->razon_social }}</option>--}}
-{{--            @endforeach--}}
-{{--        </select>--}}
+        <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+                <div class="flex flex-col">
+                    <input type="date" wire:model.live.debounce.200ms="from_date" class="p-2 bg-gray-700 text-white rounded">
+                    <span class="text-xs text-gray-400 mt-1">Desde</span>
+                </div>
+                <div class="flex flex-col">
+                    <input type="date" wire:model.live.debounce.200ms="to_date" class="p-2 bg-gray-700 text-white rounded">
+                    <span class="text-xs text-gray-400 mt-1">Hasta</span>
+                </div>
+                <div class="flex flex-col">
+                    <input type="text" wire:model.live.debounce.200ms="company_name" placeholder="Filtrar por Razón Social" class="p-2 bg-gray-700 text-white rounded">
+                    <span class="text-xs text-gray-400 mt-1">Razón Social</span>
+                </div>
+            </div>
+        </div>
 
-{{--        <select wire:model="state" class="p-2 bg-gray-700 text-white rounded">--}}
-{{--            <option value="">Todos los estados</option>--}}
-{{--            <option value="pending">Pendiente</option>--}}
-{{--            <option value="finished">Finalizado</option>--}}
-{{--            <option value="canceled">Cancelado</option>--}}
-{{--        </select>--}}
+        <div>
+            <flux:button icon="document-arrow-down" wire:click="exportCSV()"
+                    class="bg-green-500! hover:bg-green-600! hover:cursor-pointer text-white px-4 py-2 rounded">
+                Exportar CSV
+            </flux:button>
+            <flux:button icon="document-arrow-down" button wire:click="exportXLSX()"
+                    class="bg-green-500! hover:bg-green-600! hover:cursor-pointer text-white px-4 py-2 rounded ml-2">
+                Exportar Excel
+            </flux:button>
+        </div>
     </div>
 
     <table class="w-full bg-gray-700 text-white rounded-lg">
