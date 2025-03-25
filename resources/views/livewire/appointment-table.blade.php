@@ -77,13 +77,13 @@
             <!-- Página anterior -->
             <button
                 wire:click="goToPage({{ $page - 1 }})"
-                class="px-4 py-2 bg-gray-700 hover:bg-gray-800 rounded"
+                class="px-4 py-2 text-white bg-gray-700 hover:bg-gray-800 rounded"
                 @if($page == 1) disabled @endif>
                 Anterior
             </button>
 
             <!-- Páginas -->
-            <span class="px-4 py-2">
+            <span class="px-4 py-2 text-white">
                 @if (empty($appointments))
                     Sin datos para mostrar
                 @else
@@ -94,7 +94,7 @@
             <!-- Página siguiente -->
             <button
                 wire:click="goToPage({{ $page + 1 }})"
-                class="px-4 py-2 bg-gray-700 hover:bg-gray-800 rounded"
+                class="px-4 py-2 text-white bg-gray-700 hover:bg-gray-800 rounded"
                 @if($page == $lastPage) disabled @endif>
                 Siguiente
             </button>
