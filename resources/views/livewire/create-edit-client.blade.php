@@ -1,22 +1,5 @@
 <div>
-    @if ($message = session()->pull('message'))
-        <div x-data="{ show: true }"
-             x-show="show"
-             x-init="setTimeout(() => show = false, 3000)"
-             x-transition.opacity
-             class="fixed bottom-10 right-10 bg-green-500 text-white p-4 rounded-lg shadow-md z-50">
-            {{ $message }}
-        </div>
-    @endif
-    @if ($error = session()->pull('error'))
-        <div x-data="{ show: true }"
-             x-show="show"
-             x-init="setTimeout(() => show = false, 3000)"
-             x-transition.opacity
-             class="fixed bottom-10 right-10 bg-red-500 text-white p-4 rounded-lg shadow-md z-50">
-            {{ $error }}
-        </div>
-    @endif
+    <x-flash-message />
     @if($isOpen)
         <div class="fixed inset-0 bg-black/85 flex justify-center items-center z-50">
             <div class="bg-gray-900 text-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto relative">

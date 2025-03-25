@@ -1,10 +1,5 @@
 <div>
-    @if (session()->has('message'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
-             class="fixed bottom-10 right-10 bg-green-500 text-white p-4 rounded-lg shadow-md z-50">
-            {{ session('message') }}
-        </div>
-    @endif
+    <x-flash-message />
     @if($isOpen)
         <div class="fixed inset-0 bg-black/85 flex justify-center items-center z-50">
             <div class="bg-gray-900 text-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto relative">
