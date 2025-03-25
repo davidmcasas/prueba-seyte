@@ -1,5 +1,15 @@
 <div>
     <h2 class="text-2xl my-4 px-2">Clientes</h2>
+    <div class="flex justify-end mb-4">
+        <button wire:click="exportCSV()"
+           class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Exportar CSV
+        </button>
+        <button wire:click="exportXLSX()"
+                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded ml-2">
+            Exportar Excel
+        </button>
+    </div>
     <table class="min-w-full table-fixed text-left text-sm">
         <thead class="bg-gray-600">
         <tr>

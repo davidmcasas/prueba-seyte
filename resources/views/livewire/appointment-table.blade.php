@@ -1,5 +1,15 @@
 <div class="p-4 bg-gray-800 rounded-lg">
     <h2 class="text-2xl mb-4 px-2">Citas</h2>
+    <div class="flex justify-end mb-4">
+        <button wire:click="exportCSV()"
+                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Exportar CSV
+        </button>
+        <button wire:click="exportXLSX()"
+                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded ml-2">
+            Exportar Excel
+        </button>
+    </div>
     <div class="flex space-x-4 mb-4">
         <input type="date" wire:model.live.debounce.200ms="from_date" class="p-2 bg-gray-700 text-white rounded">
         <input type="date" wire:model.live.debounce.200ms="to_date" class="p-2 bg-gray-700 text-white rounded">

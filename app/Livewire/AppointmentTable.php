@@ -2,11 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Exports\AppointmentsExport;
+use App\Exports\ClientsExport;
 use App\Models\Appointment;
 use App\Models\Client;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AppointmentTable extends Component
 {
@@ -53,6 +56,26 @@ class AppointmentTable extends Component
         return view('livewire.appointment-table', [
             //'clients' => Client::all(),
         ]);
+    }
+
+
+
+    public function exportCSV()
+    {
+        return Excel::download(new AppointmentsExport([
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'company_name' => $this->company_name,
+        ]), 'citas.csv');
+    }
+
+    public function exportXLSX()
+    {
+        return Excel::download(new AppointmentsExport([
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'company_name' => $this->company_name,
+        ]), 'citas.xlsx');
     }
 }
 

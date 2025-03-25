@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Exports\ClientsExport;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Client;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientTable extends Component
 {
@@ -78,5 +80,21 @@ class ClientTable extends Component
     {
         // Emitir un evento con el clientId
         $this->dispatch('openAppointmentModal', $clientId);
+    }
+
+    public function exportCSV()
+    {
+        return Excel::download(new ClientsExport([
+                'company_name' => $this->company_name,
+                'municipality' => $this->municipality,
+            ]), 'clientes.csv');
+    }
+
+    public function exportXLSX()
+    {
+        return Excel::download(new ClientsExport([
+                'company_name' => $this->company_name,
+                'municipality' => $this->municipality,
+            ]), 'clientes.xlsx');
     }
 }
