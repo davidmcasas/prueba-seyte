@@ -25,8 +25,8 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         $company_name = fake()->unique()->company();
-        $contract_start_date = Carbon::now()->addDays((rand(0, 365)));
-        $contract_end_date = $contract_start_date->copy()->addDays((rand(7, 365)));
+        $contract_start_date = Carbon::now()->addDays((rand(0, 365)))->subDays(rand(0, 30));
+        $contract_end_date = $contract_start_date->copy()->addDays((rand(7, 730)));
         return [
             'company_name' => $company_name,
             'cif' => fake()->unique()->randomNumber(8, true),
