@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class CreateAppointment extends Component
+class CreateEditAppointment extends Component
 {
     public $isOpen = false; // Controla la visibilidad del modal
     public $appointmentId;
@@ -24,13 +24,13 @@ class CreateAppointment extends Component
         'date' => 'required|date|after_or_equal:today',
         'requested_examinations' => 'required|integer|min:1',
         'performed_examinations' => 'nullable|integer|min:0',
-        'state' => 'required|in:pending,finished,canceled',
     ];
 
     #[On('openAppointmentModal')]
     public function openAppointmentModal($clientId, $appointmentId = null)
     {
-        $this->reset(); // Resetea el formulario
+        $this->reset();
+        $this->resetValidation();
         $this->isOpen = true;
         $this->clientId = $clientId;
         $client = Client::findOrFail($clientId);
@@ -43,7 +43,6 @@ class CreateAppointment extends Component
             $this->date = Carbon::parse($appointment->date)->format('Y-m-d\TH:i');
             $this->requested_examinations = $appointment->requested_examinations;
             $this->performed_examinations = $appointment->performed_examinations;
-            $this->state = $appointment->state;
         }
     }
 
@@ -76,7 +75,6 @@ class CreateAppointment extends Component
                 'date' => $this->date,
                 'requested_examinations' => $this->requested_examinations,
                 'performed_examinations' => $this->performed_examinations ?? 0,
-                'state' => $this->state,
             ]);
             session()->flash('message', 'Cita actualizada correctamente.');
         } else {
@@ -85,16 +83,16 @@ class CreateAppointment extends Component
                 'date' => $this->date,
                 'requested_examinations' => $this->requested_examinations,
                 'performed_examinations' => $this->performed_examinations ?? 0,
-                'state' => $this->state,
             ]);
             session()->flash('message', 'Cita creada correctamente.');
         }
 
         $this->closeModal();
+        $this->dispatch('refreshTable');
     }
 
     public function render()
     {
-        return view('livewire.create-appointment');
+        return view('livewire.create-edit-appointment');
     }
 }

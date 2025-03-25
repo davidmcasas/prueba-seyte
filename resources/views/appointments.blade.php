@@ -6,4 +6,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Crear/Editar Cita -->
+    <livewire:create-edit-appointment />
+    <!-- Modal de Rellenar Cita -->
+    <livewire:fill-appointment />
 </x-layouts.app>

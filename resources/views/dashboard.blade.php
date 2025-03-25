@@ -11,5 +11,5 @@
     </div>
 
     <!-- Modal de Crear/Editar Cita -->
-    <livewire:create-appointment />
+    <livewire:create-edit-appointment />
 </x-layouts.app>

@@ -17,10 +17,9 @@ class AppointmentFactory extends Factory
     {
         return [
             'client_id' => $this->faker->numberBetween(1, 1000),  //Client::inRandomOrder()->first()->id ?? Client::factory(),
-            'date' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
+            'date' => $this->faker->dateTimeBetween('-1 year', '+3 year'),
             'requested_examinations' => $this->faker->numberBetween(1, 10),
             'performed_examinations' => $this->faker->numberBetween(0, 10),
-            'state' => $this->faker->randomElement(['pending', 'finished', 'canceled']),
         ];
     }
 }

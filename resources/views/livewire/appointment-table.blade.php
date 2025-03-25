@@ -39,12 +39,14 @@
                 <td class="p-2 text-center">{{ $appointment['requested_examinations'] }}</td>
                 <td class="p-2 text-center">{{ $appointment['performed_examinations'] }}</td>
                 <td class="p-2 text-center">
+                    @if ($appointment['performed_examinations'] == 0)
                     <button wire:click="editAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">
                         Editar
                     </button>
                     <button wire:click="fillAppointment({{ $appointment['id'] }})" class="hover:cursor-pointer bg-green-500 hover:bg-green-700 rounded px-2 py-1 ml-2">
                         Registrar Reconocimientos
                     </button>
+                    @endif
                 </td>
 {{--                <td class="p-2 text-center">--}}
 {{--                    @if ($appointment['state'] === 'pending')--}}

@@ -23,13 +23,13 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col">
                             <label class="text-sm">Fecha y Hora</label>
-                            <input type="datetime-local" wire:model="date" class="bg-gray-800 text-white p-2 rounded border border-gray-600">
+                            <input required type="datetime-local" wire:model="date" class="bg-gray-800 text-white p-2 rounded border border-gray-600">
                             @error('date') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="flex flex-col">
                             <label class="text-sm">Reconocimientos solicitados</label>
-                            <input type="number" wire:model="requested_examinations" class="bg-gray-800 text-white p-2 rounded border border-gray-600">
+                            <input required type="number" wire:model="requested_examinations" class="bg-gray-800 text-white p-2 rounded border border-gray-600">
                             @error('requested_examinations') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
 
