@@ -51,6 +51,11 @@ class AppointmentController extends Controller
         return new AppointmentResource($appointment);
     }
 
+    public function show(Appointment $appointment): AppointmentResource
+    {
+        return AppointmentResource::make($appointment);
+    }
+
     public function fill(Request $request, Appointment $appointment)
     {
         if ($appointment->performed_examinations !== 0) {
